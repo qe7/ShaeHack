@@ -8,6 +8,8 @@ import java.awt.*;
 import java.io.File;
 
 import github.qe7.client.ShaeHack;
+import github.qe7.client.event.EventManager;
+import github.qe7.client.event.impl.EventKey;
 import net.minecraft.src.*;
 import net.minecraft.src.Block;
 import org.lwjgl.LWJGLException;
@@ -881,6 +883,10 @@ public abstract class Minecraft
                         if (currentScreen != null) {
                             currentScreen.handleKeyboardInput();
                         } else {
+
+                            EventKey eventKey = new EventKey(Keyboard.getEventKey());
+                            ShaeHack.i.getEventManager().onEvent(eventKey);
+
                             if (Keyboard.getEventKey() == 1) {
                                 displayInGameMenu();
                             }
@@ -905,7 +911,7 @@ public abstract class Minecraft
                             if (Keyboard.getEventKey() == gameSettings.keyBindDrop.keyCode) {
                                 thePlayer.dropCurrentItem();
                             }
-                            if (isMultiplayerWorld() && Keyboard.getEventKey() == gameSettings.keyBindChat.keyCode) {
+                            if (Keyboard.getEventKey() == gameSettings.keyBindChat.keyCode) {
                                 displayGuiScreen(new GuiChat());
                             }
                         }

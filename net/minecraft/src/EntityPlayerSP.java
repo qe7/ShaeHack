@@ -5,6 +5,9 @@
 package net.minecraft.src;
 
 import java.util.Random;
+
+import github.qe7.client.ShaeHack;
+import github.qe7.client.event.impl.EventUpdate;
 import net.minecraft.client.Minecraft;
 
 // Referenced classes of package net.minecraft.src:
@@ -49,6 +52,10 @@ public class EntityPlayerSP extends EntityPlayer
 
     public void onLivingUpdate()
     {
+
+        EventUpdate eventUpdate = new EventUpdate();
+        ShaeHack.i.getEventManager().onEvent(eventUpdate);
+
         if(!mc.statFileWriter.hasAchievementUnlocked(AchievementList.openInventory))
         {
             mc.guiAchievement.queueAchievementInformation(AchievementList.openInventory);

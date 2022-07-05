@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import github.qe7.client.ShaeHack;
+import github.qe7.client.event.impl.EventRender2D;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
@@ -173,6 +174,9 @@ public class GuiIngame extends Gui {
             drawString(fontrenderer, (new StringBuilder()).append("z: ").append(mc.thePlayer.posZ).toString(), 2, 80, 0xe0e0e0);
             drawString(fontrenderer, (new StringBuilder()).append("f: ").append(MathHelper.floor_double((double) ((mc.thePlayer.rotationYaw * 4F) / 360F) + 0.5D) & 3).toString(), 2, 88, 0xe0e0e0);
             GL11.glPopMatrix();
+        } else {
+            EventRender2D eventRender2D = new EventRender2D(scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight());
+            ShaeHack.i.getEventManager().onEvent(eventRender2D);
         }
         if (recordPlayingUpFor > 0) {
             float f2 = (float) recordPlayingUpFor - f;
